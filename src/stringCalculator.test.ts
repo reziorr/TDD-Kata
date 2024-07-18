@@ -10,4 +10,8 @@ describe('String Calculator', () => {
   test('return 0 for empty string', () => {
     expect(calculator.add("")).toBe(0);
   });
+
+  test('return n for string containing only one number n', () =>{
+    expect(calculator.add("1")).toBe(1);
+  })
 });
