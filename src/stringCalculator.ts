@@ -8,7 +8,8 @@ export class stringCalculator {
 
       // Check if custom delimiter exists
       if(numbers.startsWith("//")){
-        delimiter = new RegExp(numbers[2]);
+        const delimiterString = numbers.split("\n",2)[0].slice(2);
+        delimiter = new RegExp(delimiterString);
         numbersOnlyString = numbers.split("\n",2)[1];
       }
 
@@ -19,6 +20,7 @@ export class stringCalculator {
         if(currentNumber < 0){
             negativeNumbers.push(currentNumber);
         }
+        // ignore numbers greater than 1000
         if(currentNumber <= 1000){
             sum += currentNumber;
         }
