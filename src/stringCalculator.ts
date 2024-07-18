@@ -19,7 +19,9 @@ export class stringCalculator {
         if(currentNumber < 0){
             negativeNumbers.push(currentNumber);
         }
-        sum += currentNumber;
+        if(currentNumber <= 1000){
+            sum += currentNumber;
+        }
       });
 
       // Check for negative numbers
