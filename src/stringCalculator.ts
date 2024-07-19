@@ -2,14 +2,16 @@ export class stringCalculator {
     add(numbers: string): number {
       if (numbers === "") return 0;
 
-      let numbersOnlyString = numbers;
-      let delimiter : RegExp = /[\n,]/;
+      let numbersOnlyString : string = numbers;
+      let delimiter : RegExp = /[\n,]/g;
       let negativeNumbers :number[] = [];
 
       // Check if custom delimiter exists
       if(numbers.startsWith("//")){
-        const delimiterString = numbers.split("\n",2)[0].slice(2);
-        delimiter = new RegExp(delimiterString);
+        const delimiterString : string = numbers.split("\n",2)[0].slice(2);
+        const delimiterArray = delimiterString.match(/\[([^\]]+)\]/g)?.map(item => item.slice(1, -1)) || [];
+        const escapedDelimiters = delimiterArray.map(d => d.replace(/[-[\]/{}()*+?.\\^$|]/g, '\\$&')).join('|');
+        delimiter = new RegExp(escapedDelimiters, 'g');
         numbersOnlyString = numbers.split("\n",2)[1];
       }
 
